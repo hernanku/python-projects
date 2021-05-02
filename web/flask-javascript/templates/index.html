@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <metadata charset="utf-8">
+    <title>My Page</title>
+</head>
+<body>
+    <h1 id="header">Welcome to my page</h1>
+    <form>
+        <label for="name">Please enter your name:</label>
+        <input type="text" placeholder="Name here" name="name" id="name" />
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById('submit').onclick = event => {
+            event.preventDefault()
+            fetch('/data')
+                .then(res => res.text())
+                .then(response => alert(response))
+                .catch(err => console.error(err))
+        }
+    </script>
+</body>
+</html>
