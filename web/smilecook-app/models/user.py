@@ -9,14 +9,14 @@ class User(db.Model):
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(200))
     is_active = db.Column(db.Boolean(), default=False)
-    created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
-    created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
+    created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
 
     recipes = db.relationship('Recipe', backref='user')
 
     @classmethod
     def get_by_username(cls, username):
-        return cls.query.filter(username=username).first()
+        return cls.query.filter_by(username=username).first()
 
     @classmethod
     def get_by_email(cls, email):
