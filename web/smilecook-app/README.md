@@ -3,7 +3,8 @@
 
 
 **Endpoint design table.**
-| HTTP Verp | Description | Methods to handle the requests | url |
+| HTTP Verb | Description | Methods to handle the requests | url |
+| --- | --- | ---| ---|
 | GET | Gets all the recipes | RecipeListResource.get | http://localhost:5000/recipes |
 | POST | Creates a recipe | RecipeListResource.post | http://localhost:5000/recipes |
 | GET | Gets a recipe | RecipeResource.get | http://localhost:5000/recipes/1 |
