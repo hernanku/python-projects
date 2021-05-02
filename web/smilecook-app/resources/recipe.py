@@ -22,10 +22,13 @@ class RecipeListResource(Resource):
 
 
     def post(self):
+        # get recipe data details from request call (request.get_json())
+        data = request.get_json()
 
         # define data required for post request
         recipe = Recipe(
             name=data['name'],
+            description=data['description'],
             num_of_servings=data['num_of_servings'],
             cook_time=data['cook_time'],
             directions=data['directions']
@@ -75,7 +78,7 @@ class RecipeResource(Resource):
         recipe.description = data['description']
         recipe.num_of_servings = data['num_of_servings']
         recipe.cook_time = data['cook_time']
-        recipe.direction = data['direction']
+        recipe.directions = data['directions']
 
         # return data and an OK http status
         return recipe.data, HTTPStatus.OK

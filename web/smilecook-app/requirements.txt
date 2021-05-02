@@ -1,3 +1,4 @@
 flask
 httpie
+flask_restful
 
