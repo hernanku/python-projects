@@ -1,4 +1,10 @@
+wheel
 flask
-httpie
+Flask-SQLAlchemy
+Flask-Migrate
 flask_restful
+httpie
+psycopg2-binary
+sqlalchemy
+passlib
 
