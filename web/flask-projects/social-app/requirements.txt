@@ -13,3 +13,4 @@ PySocks
 requests
 urllib3
 Werkzeug
+flask-bootstrap
