@@ -1,0 +1,15 @@
+itsdangerous
+requests-toolbelt
+certifi
+chardet
+click
+Flask
+httpie
+idna
+Jinja2
+MarkupSafe
+Pygments
+PySocks
+requests
+urllib3
+Werkzeug
