@@ -1,11 +1,13 @@
+import datetime
+import feedparser
 from flask import Flask
 from flask import render_template
 from flask import request
-import feedparser
+from flask import make_response
+from urllib.request import urlopen
 import json
 import urllib
 import urllib.parse
-from urllib.request import urlopen
 
 # import requests
 
@@ -30,33 +32,43 @@ rss_feed = {
 
 @app.route("/")
 def home():
-    publication = request.args.get("publication")
-    if not publication:
-        publication = default_data["publication"]
+    publication = get_value_with_fallback('publication')
     articles = get_news(publication)
 
-    city = request.args.get("city")
-    if not city:
-        city = default_data["city"]
+    city = get_value_with_fallback('city')
     weather = get_weather(city)
 
-    currency_from = request.args.get("currency_from")
-    if not currency_from:
-        currency_from = default_data["currency_from"]
-    currency_to = request.args.get("currency_to")
-    if not currency_to:
-        currency_to = default_data["currency_to"]
+    currency_from = get_value_with_fallback('currency_from')
+    currency_to = get_value_with_fallback("currency_to")
+    
     rate, currencies = get_rate(currency_from, currency_to)
 
-    return render_template(
-        "home.html",
-        articles=articles,
-        weather=weather,
-        currency_from=currency_from,
-        currency_to=currency_to,
-        rate=rate,
-        currencies=sorted(currencies)
+    response = make_response(
+        render_template(
+            "home.html",
+            articles=articles,
+            weather=weather,
+            currency_from=currency_from,
+            currency_to=currency_to,
+            rate=rate,
+            currencies=sorted(currencies),
+        )
     )
+    expires_at = datetime.datetime.now() + datetime.timedelta(days=1)
+    response.set_cookie("publication", publication, expires=expires_at)
+    response.set_cookie("city", city, expires=expires_at)
+    response.set_cookie("currency_from", currency_from, expires=expires_at)
+    response.set_cookie("currency_to", currency_to, expires=expires_at)
+
+    return response
+
+
+def get_value_with_fallback(key):
+    if request.args.get(key):
+        return request.args.get(key)
+    if request.cookies.get(key):
+        return request.cookies.get(key)
+    return default_data[key]
 
 
 def get_news(publication):
