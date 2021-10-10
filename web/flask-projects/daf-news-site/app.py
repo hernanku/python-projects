@@ -33,14 +33,14 @@ rss_feed = {
 @app.route("/")
 def home():
     publication = get_value_with_fallback('publication')
-    articles = get_news(publication)
+    articles = get_news(publication.lower())
 
     city = get_value_with_fallback('city')
     weather = get_weather(city)
 
     currency_from = get_value_with_fallback('currency_from')
     currency_to = get_value_with_fallback("currency_to")
-    
+
     rate, currencies = get_rate(currency_from, currency_to)
 
     response = make_response(
@@ -72,7 +72,7 @@ def get_value_with_fallback(key):
 
 
 def get_news(publication):
-    feed = feedparser.parse(rss_feed[publication])
+    feed = feedparser.parse(rss_feed[publication.lower()])
     return feed["entries"]
 
 
@@ -102,3 +102,4 @@ def get_rate(frm, to):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+

@@ -1,10 +1,56 @@
 <html>
     <head>
         <title>Headlines</title>
+        <style>
+            html {
+                font-family: "Helvetica";
+                background: white;
+            }
+            body {
+                background: lightgray; 
+                max-width: 1500px;
+                margin: auto;
+            }
+            #header {
+                padding-top: 5;
+                background: lightsteelblue;
+            }
+            #inner-header {
+                padding-left: 10;
+            }
+            #inner-left {
+                padding-left: 10;
+            }
+            input[type="text"], select {
+                color: grey;
+                border: 1px solid lightsteelblue;
+                height: 30px;
+                line-height: 15px;
+                margin: 2px 6px 16px 0px;
+            }
+            input[type="submit"], select {
+                padding: 5px 10px 5px 10px;
+                color: black;
+                background: lightsteelblue;
+                border: none;
+                box-shadow: 2px 6px 16px 0px;
+            }
+            input[type="submit"], :hover{
+                background: steelblue;
+            }
+        </style>
     </head>
     <body>
-        <h1>Headlines</h1>
-        <h2>Current Weather</h2>
+        <div id="header">
+            <div id="inner-header">
+                <h1>Headlines</h1>
+                <p>Headlines. Currency. Weather</p>
+            </div>
+            <hr />
+        </div>
+        <div id="main">
+            <h2>Current Weather</h2>
+        </div>
         <form>
             <input type="text" name="city" placeholder="weather search" />
             <input type="submit" value="Submit" />
